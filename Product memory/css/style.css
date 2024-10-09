@@ -36,9 +36,14 @@ li {
 }
 
 .header {
-  width: 100%;
+  width: 80%;
   height: 105px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
   border-bottom: #D94350 5px solid;
+  position: fixed;
+  top: 0;
 }
 .header__title {
   font-size: 16px;
@@ -49,6 +54,37 @@ li {
   padding-top: 50px;
 }
 
+.header-mypage {
+  width: 100%;
+  height: 250px;
+  background-color: #D94350;
+  position: fixed;
+  top: 0;
+}
+.header-mypage__inner {
+  margin-top: 107px;
+  width: min(85.9375%, 2000px);
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-mypage-element {
+  padding-right: 100px;
+}
+.header-mypage-text {
+  margin-bottom: 26px;
+}
+.header-mypage-link {
+  font-size: 12px;
+  color: #000;
+}
+
+.main {
+  margin-top: 155px;
+}
 .main__inner {
   width: min(85.9375%, 2000px);
   margin-left: auto;
@@ -151,5 +187,110 @@ li {
 .main__form-btn a {
   font-size: 20px;
   color: #fff;
+}
+.main_btn {
+  margin-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.main_btn-fashion {
+  cursor: pointer;
+  width: 159px;
+  height: 35px;
+  color: #fff;
+  background-color: #D94350;
+  border: none;
+  border-radius: 10px;
+}
+.main_btn-magazine {
+  cursor: pointer;
+  width: 159px;
+  height: 35px;
+  color: #000;
+  background-color: #fff;
+  border: 1px #D94350 solid;
+  border-radius: 10px;
+}
+.main__fasshion-individual {
+  padding: 10px 0;
+  border-bottom: #000 1px solid;
+}
+.main__fasshion-individual a {
+  color: #000;
+}
+.main__magazine {
+  display: none;
+}
+.main__magazine-individual {
+  padding: 10px 0;
+  border-bottom: #000 1px solid;
+}
+.main__magazine-individual a {
+  color: #000;
+}
+.main__registration {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 55px;
+}
+.main__registration-nonetext {
+  font-size: 16px;
+  font-weight: normal;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 200px;
+}
+.main__registrationpage {
+  text-align: center;
+  margin-top: 200px;
+  max-width: 243px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.main__registrationpage-text {
+  display: inline-block;
+  margin-bottom: 44px;
+}
+.main__registrationpage-img {
+  display: inline-block;
+}
+.main__registrationpage-batu {
+  display: inline-block;
+  margin-top: 84px;
+}
+
+.footer {
+  width: 100%;
+  height: 133px;
+  background-color: #fff;
+  border-top: #D94350 5px solid;
+  position: fixed;
+  bottom: 0;
+}
+.footer__inner {
+  margin-top: 20px;
+  width: min(85.9375%, 2000px);
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer__list {
+  width: 80px;
+  text-align: center;
+}
+.footer__list-img {
+  display: inline-block;
+  margin-bottom: 7px;
+}
+.footer__list-name {
+  color: #5C2B15;
 }
 /*# sourceMappingURL=style.css.map */
