@@ -27,7 +27,9 @@
 </head>
 <body>
     <header class="header">
-        <h1 class="header__title">Cartlog</h1>
+        <div class="header__back">
+            <h1 class="header__title">Cartlog</h1>
+        </div>
     </header>
     <main class="main">
         <div class="main__inner">

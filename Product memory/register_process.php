@@ -1,9 +1,9 @@
 <?php
 // データベース接続情報
 $host = 'localhost'; // またはデータベースサーバーのホスト名
-$dbname = 'your_database_name'; // データベース名
+$dbname = 'user_db'; // データベース名
 $username = 'root'; // データベースのユーザー名
-$password = ''; // データベースのパスワード（設定していない場合は空白）
+$password = 'hfiuoajnjkl'; // データベースのパスワード（設定していない場合は空白）
 
 try {
     // データベース接続を確立

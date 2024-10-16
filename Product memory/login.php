@@ -27,7 +27,9 @@
 </head>
 <body>
     <header class="header">
-        <h1 class="header__title">Cartlog</h1>
+        <div class="header__back">
+            <h1 class="header__title">Cartlog</h1>
+        </div>
     </header>
     <main class="main">
         <div class="main__inner">
@@ -35,21 +37,24 @@
                 <img class="main__title-img" src="./image/register.png" alt="">
                 <h2 class="main__title-text">ログイン</h2>
             </div>
-            <form class="main__form" action="register_process.php" method="POST">
+            <form class="main__form" action="" method="POST">
+                <div class="main__form-list main__form-name">
+                    <img class="main__form-img" src="./image/name.png" alt="">
+                    <input class="main__form-input" type="text" name="nickname" value="" placeholder="ニックネーム" required>
+                </div>
                 <div class="main__form-list main__form-mail">
                     <img class="main__form-img" src="./image/mail.png" alt="">
-                    <input class="main__form-input" type="email" name="email" value="" placeholder="メールアドレス"  required>
+                    <input class="main__form-input" type="email" name="email" value="" placeholder="メールアドレス" required autocomplete="email">
                 </div>
                 <div class="main__form-list main__form-pass">
                     <img class="main__form-img" src="./image/pass.png" alt="">
-                    <input class="main__form-input" type="password" name="password" value="" placeholder="パスワード"  required>
+                    <input class="main__form-input" type="password" name="password" value="" placeholder="パスワード" required autocomplete="current-password">
                 </div>
                 <button class="main__form-btn" type="submit">ログイン</button>
             </form>
         </div>
     </main>
     <footer class="footer">
-
     </footer>
 </body>
 </html>

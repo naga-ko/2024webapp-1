@@ -28,29 +28,32 @@
 </head>
 
 <body>
-    <header class="header-mypage">
-        <div class="header-mypage__inner">
-            <img class="header-mypage-img" src="./image/flower.png" alt="">
-            <div class="header-mypage-element">
-                <p class="header-mypage-text">まーちゃん</p>
-                <a class="header-mypage-link" href="">登録情報の変更　＞</a>
-            </div>
+    <header class="header">
+        <div class="header__back">
+            <h1 class="header__title">Cartlog</h1>
         </div>
     </header>
     <main class="main">
         <div class="main__inner">
-            <div class="main__mypage">
-                <div class="main__mypage-favorite">
-                    <p class="main__mypage-favorite-p">お気に入り店舗</p>
-                    <img class="main__mypage-favorite-yajirusi" src="./image/yajirusi.png" alt="">
-                </div>
-                <ul class="main__mypage-favorite-list">
-                    <li>a</li>
-                    <li>a</li>
+            <div class="main_btn">
+                <button class="main_btn-fashion">ファッション</button>
+                <button class="main_btn-magazine">雑貨</button>
+            </div>
+            <div class="main__fasshion">
+                <ul class="main__fasshion-unity">
+                    <li class="main__fasshion-individual"><a href="">niko and...</a></li>
+                    <li class="main__fasshion-individual"><a href="">GLOBAL WORK</a></li>
+                    <li class="main__fasshion-individual"><a href="">LOWRYS FARM</a></li>
+                    <li class="main__fasshion-individual"><a href="">LEPSIM</a></li>
+                    <li class="main__fasshion-individual"><a href="">JEANASIS</a></li>
+                    <li class="main__fasshion-individual"><a href="">BAYFLOW</a></li>
                 </ul>
-
-                <p class="main__mypage-setting"><a href="">設定</a></p>
-
+            </div>
+            <div class="main__magazine">
+                <ul class="main__magazine-unity">
+                    <li class="main__magazine-individual"><a href="">BAYFLOW</a></li>
+                    <li class="main__magazine-individual"><a href="">studio CLIP</a></li>
+                </ul>
             </div>
         </div>
     </main>
@@ -76,7 +79,7 @@
             </a>
         </div>
     </footer>
-    <script src="./js/favorite.js"></script>
+    <script src="./js/list.js"></script>
 </body>
 
 </html>
