@@ -28,29 +28,40 @@
 </head>
 
 <body>
-    <header class="header-mypage">
-        <div class="header-mypage__inner">
-            <img class="header-mypage-img" src="./image/flower.png" alt="">
-            <div class="header-mypage-element">
-                <p class="header-mypage-text">まーちゃん</p>
-                <a class="header-mypage-link" href="">登録情報の変更　＞</a>
-            </div>
-        </div>
+    <header class="header">
+        <h1 class="header__title">Cartlog</h1>
     </header>
     <main class="main">
         <div class="main__inner">
-            <div class="main__mypage">
-                <div class="main__mypage-favorite">
-                    <p class="main__mypage-favorite-p">お気に入り店舗</p>
-                    <img class="main__mypage-favorite-yajirusi" src="./image/yajirusi.png" alt="">
-                </div>
-                <ul class="main__mypage-favorite-list">
-                    <li>a</li>
-                    <li>a</li>
+            <img class="main__item-img" src="./image/item-img.png" alt="">
+            <div class="main__item-details">
+                <p class="main__item-details-name">Tシャツ</p>
+                <p class="main__item-details-size">Mサイズ</p>
+                <p class="main__item-details-price">¥6,450</p>
+            </div>
+            <div class="main__item-selection">
+                <p class="main__item-selection-p">トップス</p>
+                <img class="main__item-selection-img" src="./image/yajirusi.png" alt="">
+            </div>
+            <div class="main__item-selection-list">
+                <ul>
+                    <li><a href="">パンツ</a></li>
+                    <li><a href="">スカート</a></li>
+                    <li><a href="">ワンピース</a></li>
+                    <li><a href="">アウター</a></li>
+                    <li><a href="">シューズ</a></li>
+                    <li><a href="">バッグ・カバン</a></li>
+                    <li><a href="">ヘアアクセサリー</a></li>
+                    <li><a href="">アクセサリー</a></li>
                 </ul>
-
-                <p class="main__mypage-setting"><a href="">設定</a></p>
-
+            </div>
+            <p class="main__item-memo-p">メモ</p>
+            <form class="main__item-form" action="">
+                <textarea class="main__item-form-textarea" name="" id="" cols="30" rows="10"></textarea>
+            </form>
+            <div class="main__item-btn">
+                <button class="main__item-btn-cancel"><a href="">キャンセル</a></button>
+                <button class="main__item-btn-recording"><a href="">記録する</a></button>
             </div>
         </div>
     </main>
@@ -76,7 +87,6 @@
             </a>
         </div>
     </footer>
-    <script src="./js/favorite.js"></script>
 </body>
 
 </html>
