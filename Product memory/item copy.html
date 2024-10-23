@@ -35,12 +35,36 @@
     </header>
     <main class="main">
         <div class="main__inner">
-            <div class="main__registration">
-                <h2 class="main__registration-title">GLOBAL WORK</h2>
-                <a href="./registrationpage.html"><img class="main__registration-img" src="./image/purasu.png"
-                        alt=""></a>
-            </div>
-            <h3 class="main__registration-nonetext">まだ登録されていません</h3>
+            <form class="main__item-form" action="">
+                <img class="main__item-img" src="./image/item-img.png" alt="">
+                <div class="main__item-details">
+                    <p class="main__item-details-name">Tシャツ</p>
+                    <p class="main__item-details-size">Mサイズ</p>
+                    <p class="main__item-details-price">¥6,450</p>
+                </div>
+                <div class="main__item-selection">
+                    <p class="main__item-selection-p">トップス</p>
+                    <img class="main__item-selection-img" src="./image/yajirusi.png" alt="">
+                </div>
+                <div class="main__item-selection-list">
+                    <ul>
+                        <li class="main__item-selection-list-li"><a href="">パンツ</a></li>
+                        <li class="main__item-selection-list-li"><a href="">スカート</a></li>
+                        <li class="main__item-selection-list-li"><a href="">ワンピース</a></li>
+                        <li class="main__item-selection-list-li"><a href="">アウター</a></li>
+                        <li class="main__item-selection-list-li"><a href="">シューズ</a></li>
+                        <li class="main__item-selection-list-li"><a href="">バッグ・カバン</a></li>
+                        <li class="main__item-selection-list-li"><a href="">ヘアアクセサリー</a></li>
+                        <li><a href="">アクセサリー</a></li>
+                    </ul>
+                </div>
+                <p class="main__item-memo-p">メモ</p>
+                <textarea class="main__item-form-textarea" name="" id="" cols="30" rows="10"></textarea>
+                <div class="main__item-btn">
+                    <button class="main__item-btn-cancel" type="submit">キャンセル</button>
+                    <button class="main__item-btn-recording" type="submit">記録する</button>
+                </div>
+            </form>
         </div>
     </main>
     <footer class="footer">
@@ -65,6 +89,7 @@
             </a>
         </div>
     </footer>
+    <script src="./js/item.js"></script>
 </body>
 
 </html>

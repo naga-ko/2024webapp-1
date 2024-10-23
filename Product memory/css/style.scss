@@ -422,10 +422,11 @@ li {
                 border: $color-main 1px solid;
                 font-size: 16px;
                 background-color: $color-white;
+                color: #000;
+                cursor: pointer;
 
                 a {
                     display: block;
-                    color: #000;
                 }
             }
 
@@ -436,18 +437,105 @@ li {
                 border: none;
                 font-size: 16px;
                 background-color: $color-main;
+                color: $color-white;
+                cursor: pointer;
 
                 a {
                     display: block;
-                    color: $color-white;
                 }
             }
+        }
+
+        &-select {
+            padding: 8px 12px;
+            appearance: none;
+            /* デフォルトの矢印を非表示に */
+            -webkit-appearance: none;
+            /* Safari対応 */
+            -moz-appearance: none;
+            /* Firefox対応 */
+            background: url('../image/yajirusi.png') no-repeat right 10px center;
+            /* 矢印画像を右側に配置 */
+            background-size: 20px;
+            /* 画像サイズを調整 */
+            padding-right: 40px;
+            /* 矢印が被らないように余白を追加 */
+            border: 1px solid #000;
+            font-size: 16px;
+            margin-bottom: 20px;
         }
 
     }
 }
 
+.item {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    padding: 10px;
+    color: #000;
+}
 
+.item__image {
+    width: 131px;
+    height: auto;
+    margin-right: 20px;
+}
+
+.item__details {
+    flex-grow: 1;
+}
+
+
+
+.item__size,
+.item__price,
+.item__memo {
+    font-size: 1em;
+    margin: 5px 0;
+    display: inline-block;
+}
+
+.item__name {
+    font-size: 1em;
+    margin: 5px 20px 5px 0;
+    display: inline-block;
+}
+
+.item__memo {
+    font-size: 1em;
+    margin: 5px 0;
+    display: block;
+}
+
+.details__item {
+    &__image {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    &__flex {
+        @include flex();
+    }
+
+    &__price {
+        padding-left: 100px;
+        margin-bottom: 5px;
+    }
+
+    &__category {
+        margin-bottom: 10px;
+    }
+
+    &__memo-p {
+        margin-bottom: 10px;
+    }
+
+    &__memo {
+        border: 1px #000 solid;
+        padding: 10px 9px;
+    }
+}
 
 
 .footer {

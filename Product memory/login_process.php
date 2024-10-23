@@ -1,49 +1,65 @@
 <?php
 session_start();
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// ini_set('log_errors', 1);
+// ini_set('error_log', __DIR__ . '/php-error.log'); // ログファイルをプロジェクトフォルダ内に作成
 
 // データベース接続情報
-$host = 'localhost'; // またはデータベースサーバーのホスト名
-$dbname = 'user_db'; // データベース名
-$username = 'root'; // データベースのユーザー名
-$password = 'hfiuoajnjkl'; // データベースのパスワード（設定していない場合は空白）
+$host = 'localhost';
+$dbname = 'user_db';
+$username = 'root';
+$password = 'hfiuoajnjkl';
 
 try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass);
+    // データベース接続を確立
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("データベース接続失敗: " . $e->getMessage());
+}
 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
-    $password = $_POST['password'];
+    $password = $_POST['password']; // ここではハッシュ化しない
     $nickname = $_POST['nickname'];
 
     // デバッグ: 受信したデータを表示
     echo "POSTリクエストを受信しました。<br>";
-    echo "Nickname: " . htmlspecialchars($nickname) . "<br>";
-    echo "Email: " . htmlspecialchars($email) . "<br>";
-    echo "Password: " . htmlspecialchars($password) . "<br>";
+    echo "nickname: " . htmlspecialchars($nickname) . "<br>";
+    echo "email: " . htmlspecialchars($email) . "<br>";
 
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email");
-    $stmt->bindParam(':email', $email);
-    $stmt->execute();
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($user) {
-        // パスワードを比較
-        if (password_verify($password, $user['password'])) {
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['nickname'] = $user['nickname'];
-            header("Location: main.html");
-            exit();
-        } else {
-            echo "メールアドレスまたはパスワードが間違っています。";
-        }
-    } else {
-        echo "メールアドレスが見つかりません。";
+    // メールアドレスが正しい形式かチェック
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "無効なメールアドレスです。";
+        error_log("無効なメールアドレス: " . $email);
+        exit();
     }
-}
-} catch (PDOException $e) {
-    echo "エラー: " . $e->getMessage();
+
+    try {
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email");
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user) {
+            // パスワードを比較 (データベースのハッシュ化されたパスワードとユーザーの入力を照合)
+            if (password_verify($password, $user['password'])) {
+                $_SESSION['id'] = $user['id'];
+                $_SESSION['nickname'] = $user['nickname'];
+                header("Location: main.php");
+                exit();
+            } else {
+                echo "パスワードが一致しません。"; // エラーメッセージを明確に出力
+                error_log("パスワードが一致しません。");
+            }
+        } else {
+            echo "メールアドレスが見つかりません。"; // メールアドレスが見つからない場合
+            error_log("メールアドレスが見つかりません: " . $email);
+        }
+    } catch (PDOException $e) {
+        error_log("PDOエラー: " . $e->getMessage());
+        echo "エラー: " . $e->getMessage();
+    }
 }
 ?>

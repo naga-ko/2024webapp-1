@@ -37,7 +37,7 @@
                 <img class="main__title-img" src="./image/register.png" alt="">
                 <h2 class="main__title-text">ログイン</h2>
             </div>
-            <form class="main__form" action="" method="POST">
+            <form class="main__form" action="login_process.php" method="POST">
                 <div class="main__form-list main__form-name">
                     <img class="main__form-img" src="./image/name.png" alt="">
                     <input class="main__form-input" type="text" name="nickname" value="" placeholder="ニックネーム" required>
@@ -52,6 +52,7 @@
                 </div>
                 <button class="main__form-btn" type="submit">ログイン</button>
             </form>
+
         </div>
     </main>
     <footer class="footer">
