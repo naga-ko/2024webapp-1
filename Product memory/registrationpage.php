@@ -38,7 +38,10 @@
             <div class="main__registrationpage">
                 <p class="main__registrationpage-text">タグに端末を近づけてください</p>
                 <img class="main__registrationpage-img" src="./image/tag.png" alt="">
-                <a href="./registration.php"><img class="main__registrationpage-batu" src="./image/batu.png" alt=""></a>
+                <!-- ブランドIDを含むリンクを生成 -->
+                <a href="./main.html">
+                    <img class="main__registrationpage-batu" src="./image/batu.png" alt="">
+                </a>
             </div>
         </div>
     </main>
@@ -50,7 +53,7 @@
                     <p class="footer__list-name">一覧</p>
                 </div>
             </a>
-            <a href="./registration.php">
+            <a href="./registrationpage.php">
                 <div class="footer__list footer__registration">
                     <img class="footer__list-img" src="./image/toruroku.png" alt="">
                     <p class="footer__list-name">登録</p>

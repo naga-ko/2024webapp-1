@@ -31,9 +31,26 @@
                     <input type="hidden" name="product_name" value="Tシャツ">
                     <input type="hidden" name="size" value="Mサイズ">
                     <input type="hidden" name="price" value="6450">
+                    <!-- <input id="brand_id" type="hidden" name="brand_id" value="1"> -->
                     <label class="main__item-details-name">Tシャツ</label>
                     <label class="main__item-details-size">Mサイズ</label>
                     <label class="main__item-details-price">¥6,450</label>
+                </div>
+
+                <div class="main__item-brand">
+                    <label for="brand_id" class="main__item-label">ブランド</label>
+                    <select name="brand_id" id="brand_id" required>
+                        <option value="" disabled selected>ブランドを選択してください</option>
+                        <option value="1">niko and...</option>
+                        <option value="2">GLOBAL WORK</option>
+                        <option value="3">LOWRYS FARM</option>
+                        <option value="4">LEPSIM</option>
+                        <option value="5">JEANASIS</option>
+                        <option value="6">BAYFLOW</option>
+                        <option value="7">BAYFLOW2</option>
+                        <option value="8">studio CLIP</option>
+                        <!-- 他のブランドもここに追加可能 -->
+                    </select>
                 </div>
 
                 <!-- リストから選べる項目 -->
@@ -88,7 +105,7 @@
             </a>
         </div>
     </footer>
-    <script src="./js/item.js"></script>
+    <!-- <script src="./js/item.js"></script> -->
 </body>
 
 </html>

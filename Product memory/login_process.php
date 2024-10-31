@@ -21,7 +21,7 @@ try {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
-    $password = $_POST['password']; // ここではハッシュ化しない
+    $password = $_POST['password'];
     $nickname = $_POST['nickname'];
 
     // デバッグ: 受信したデータを表示
@@ -43,18 +43,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user) {
-            // パスワードを比較 (データベースのハッシュ化されたパスワードとユーザーの入力を照合)
+            // パスワードを比較
             if (password_verify($password, $user['password'])) {
                 $_SESSION['id'] = $user['id'];
                 $_SESSION['nickname'] = $user['nickname'];
-                header("Location: main.php");
+
+                // ユニークなlogin_idを取得
+                $stmt = $pdo->query("SELECT MAX(login_id) as max_login_id FROM users");
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                $new_login_id = ($result['max_login_id'] !== null) ? $result['max_login_id'] + 1 : 1; // 最大値に1を足す
+
+                // usersテーブルにlogin_idを更新
+                $update_stmt = $pdo->prepare("UPDATE users SET login_id = :login_id WHERE id = :id");
+                $update_stmt->bindParam(':login_id', $new_login_id);
+                $update_stmt->bindParam(':id', $_SESSION['id']);
+                $update_stmt->execute();
+
+                // itemテーブルにlogin_idを追加
+                // ここではlogin_idを使ってアイテムを更新する
+                // $insert_stmt = $pdo->prepare("UPDATE item SET login_id = :login_id WHERE login_id = :old_login_id");
+                // $insert_stmt->bindParam(':login_id', $new_login_id);
+                // $old_login_id = $user['login_id']; // 古いlogin_id
+                // $insert_stmt->bindParam(':old_login_id', $old_login_id);
+                // $insert_stmt->execute();
+
+                header("Location: main.html");
                 exit();
             } else {
-                echo "パスワードが一致しません。"; // エラーメッセージを明確に出力
+                echo "パスワードが一致しません。";
                 error_log("パスワードが一致しません。");
             }
         } else {
-            echo "メールアドレスが見つかりません。"; // メールアドレスが見つからない場合
+            echo "メールアドレスが見つかりません。";
             error_log("メールアドレスが見つかりません: " . $email);
         }
     } catch (PDOException $e) {

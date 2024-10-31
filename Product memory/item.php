@@ -14,14 +14,12 @@ if ($conn->connect_error) {
 }
 
 // フォームからデータを受け取る
-// フォームからデータを受け取る
 $product_name = $_POST['product_name'];
 $size = $_POST['size'];
 $price = $_POST['price'];
-$category = $_POST['category']; // カテゴリを取得
+$category = $_POST['category'];
 $memo = $_POST['memo'];
-// optionsの取得を削除
-// $options = $_POST['options'] ?? '';
+$brand_id = $_POST['brand_id']; // 追加: brand_idを取得
 
 // 画像アップロード処理
 $image = ""; // デフォルトの値
@@ -38,14 +36,14 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
     }
 }
 
-// データを挿入するSQL文（optionsを削除）
-$stmt = $conn->prepare("INSERT INTO item (product_name, size, price, category, memo, image) VALUES (?, ?, ?, ?, ?, ?)");
-$stmt->bind_param("ssssss", $product_name, $size, $price, $category, $memo, $image);
+// データを挿入するSQL文
+$stmt = $conn->prepare("INSERT INTO item (product_name, size, price, category, memo, image, brand_id) VALUES (?, ?, ?, ?, ?, ?, ?)"); // brand_idを追加
+$stmt->bind_param("sssssss", $product_name, $size, $price, $category, $memo, $image, $brand_id); // brand_idをバインド
 
 // 実行
 if ($stmt->execute()) {
     echo "新しい商品が追加されました";
-    echo '<a href="registration.php" class="btn-back">戻る</a>';
+    echo '<a href="registration.php?brand_id=' . htmlspecialchars($brand_id) . '" class="btn-back">戻る</a>'; // brand_idを追加
 } else {
     echo "エラー: " . $stmt->error;
 }
@@ -53,4 +51,6 @@ if ($stmt->execute()) {
 
 $stmt->close();
 $conn->close();
+?>
+
 ?>
