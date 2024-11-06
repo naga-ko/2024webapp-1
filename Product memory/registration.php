@@ -1,41 +1,59 @@
 <?php
-// データベース接続情報
-$servername = "localhost"; // サーバー名
-$username = "root"; // ユーザー名
-$password = "hfiuoajnjkl"; // パスワード
-$dbname = "user_db"; // データベース名
+session_start();
 
-// データベースに接続
+// セッションからlogin_idを取得
+$login_id = isset($_GET['login_id']) ? $_GET['login_id'] : null;
+
+// セッションもしくはURLのlogin_idがない場合
+if ($login_id === null) {
+    // ログインしていない場合や、login_idがURLにない場合はリダイレクト
+    header("Location: login.php");
+    exit();
+}
+
+// brand_idをセッションに保存
+$brand_id = isset($_GET['brand_id']) ? (int)$_GET['brand_id'] : 0;
+$_SESSION['brand_id'] = $brand_id;  // セッションに保存
+
+// データベース接続情報
+$servername = "localhost";
+$username = "root";
+$password = "hfiuoajnjkl";
+$dbname = "user_db";
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// 接続エラーチェック
 if ($conn->connect_error) {
     die("接続失敗: " . $conn->connect_error);
 }
 
-// URLからブランドIDを取得
-$brand_id = isset($_GET['brand_id']) ? (int)$_GET['brand_id'] : 0;
-
-// ブランド名を取得するSQL文
-$brand_sql = "SELECT brand_name FROM brands WHERE id = $brand_id"; // brandsテーブルからブランド名を取得
+// ブランド名の取得
+$brand_sql = "SELECT brand_name FROM brands WHERE id = $brand_id";
 $brand_result = $conn->query($brand_sql);
 $brand_name = "";
 
-// ブランド名の取得
 if ($brand_result->num_rows > 0) {
     $brand_row = $brand_result->fetch_assoc();
     $brand_name = htmlspecialchars($brand_row['brand_name']);
 }
 
-// 商品データを取得するSQL文（idを追加）
-$sql = "SELECT id, image, product_name, size, price, memo FROM item WHERE brand_id = $brand_id"; // idを取得するように修正
-$result = $conn->query($sql);
-
+// 商品を取得する処理はそのまま
+if ($login_id !== null) {
+    $sql = "SELECT id, image, product_name, size, price, memo
+            FROM item
+            WHERE brand_id = ? AND login_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ii", $brand_id, $login_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+} else {
+    echo "ログインしてください。";
+    exit();
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -47,7 +65,6 @@ $result = $conn->query($sql);
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
 </head>
-
 <body>
     <header class="header">
         <div class="header__back">
@@ -58,12 +75,22 @@ $result = $conn->query($sql);
         <div class="main__inner">
             <div class="main__registration">
                 <h2 class="main__registration-title"><?php echo $brand_name; ?></h2>
-                <a href="./registrationpage.php"><img class="main__registration-img" src="./image/purasu.png" alt=""></a>
+                <?php
+                // login_id がセッションに存在する場合、URL に追加してリンクを生成
+                if ($login_id !== null) {
+                    $url_with_login_id = "http://localhost:8888/registration.php?brand_id=" . urlencode($brand_id) . "&login_id=" . urlencode($login_id);
+                    echo '<a href="' . $url_with_login_id . '"><img class="main__registration-img" src="./image/purasu.png" alt=""></a>';
+                } else {
+                    echo '<p>ログインしてください。</p>';
+                }
+                ?>
             </div>
             <?php
+            // 商品が存在する場合
             if ($result->num_rows > 0) {
+                // 商品データを表示
                 while ($row = $result->fetch_assoc()) {
-                    echo '<a href="./itemdetails.php?id=' . urlencode($row['id']) . '">'; // ここで$row['id']が使用される
+                    echo '<a href="./itemdetails.php?id=' . urlencode($row['id']) . '&login_id=' . urlencode($login_id) . '">';
                     echo '<div class="item">';
                     echo '<img class="item__image" src="' . htmlspecialchars($row['image']) . '" alt="' . htmlspecialchars($row['product_name']) . '">';
                     echo '<div class="item__details">';
@@ -83,19 +110,19 @@ $result = $conn->query($sql);
     </main>
     <footer class="footer">
         <div class="footer__inner">
-            <a href="./main.html">
+            <a class="mypage-link" href="./main.html">
                 <div class="footer__list footer__itiran">
                     <img class="footer__list-img" src="./image/itiran.png" alt="">
                     <p class="footer__list-name">一覧</p>
                 </div>
             </a>
-            <a href="./registrationpage.php">
+            <a class="mypage-link" href="./registrationpage.php?login_id=<?php echo urlencode($login_id); ?>">
                 <div class="footer__list footer__registration">
                     <img class="footer__list-img" src="./image/toruroku.png" alt="">
                     <p class="footer__list-name">登録</p>
                 </div>
             </a>
-            <a href="./mypage.html">
+            <a class="mypage-link" href="./mypage.html">
                 <div class="footer__list footer__mypage">
                     <img class="footer__list-img" src="./image/mypage.png" alt="">
                     <p class="footer__list-name">マイページ</p>
@@ -103,10 +130,12 @@ $result = $conn->query($sql);
             </a>
         </div>
     </footer>
+    <script src="./js/login_id.js"></script>
 </body>
-
 </html>
+
 <?php
 // 接続を閉じる
+$stmt->close();
 $conn->close();
 ?>

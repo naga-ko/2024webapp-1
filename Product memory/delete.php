@@ -15,6 +15,10 @@ if ($conn->connect_error) {
 
 // POSTデータからIDを取得
 $item_id = isset($_POST['id']) ? intval($_POST['id']) : 0;
+$login_id = isset($_GET['login_id']) ? $_GET['login_id'] : '';
+// その他の処理
+
+
 
 if ($item_id > 0) {
     // 商品を削除するSQL文

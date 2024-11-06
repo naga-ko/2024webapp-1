@@ -15,7 +15,9 @@ if ($conn->connect_error) {
 
 // クエリパラメータからIDを取得
 $item_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
-$brand_id = isset($_GET['brand_id']) ? intval($_GET['brand_id']) : 0; // 追加
+// セッションからbrand_idを取得
+$brand_id = isset($_SESSION['brand_id']) ? $_SESSION['brand_id'] : 0;
+
 
 // 商品詳細を取得するSQL文
 $sql = "SELECT image, product_name, size, price, memo, category FROM item WHERE id = ?";
@@ -107,7 +109,8 @@ $row = $result->fetch_assoc();
                 <!-- ボタン -->
 
                 <div class="main__item-btn">
-                    <button class="main__item-btn-cancel" type="button" onclick="location.href='registration.php?brand_id=<?php echo htmlspecialchars($brand_id); ?>'">キャンセル</button>
+                    <button class="main__item-btn-cancel" type="button" onclick="window.location.href='registration.php?brand_id=<?php echo isset($_GET['brand_id']) ? htmlspecialchars($_GET['brand_id']) : '0'; ?>&login_id=<?php echo isset($_GET['login_id']) ? htmlspecialchars($_GET['login_id']) : ''; ?>'">キャンセル</button>
+
                     <button class="main__item-btn-recording" type="submit">削除</button>
                 </div>
             </form>
@@ -115,19 +118,19 @@ $row = $result->fetch_assoc();
     </main>
     <footer class="footer">
         <div class="footer__inner">
-            <a href="./main.html">
+            <a class="mypage-link" href="./main.html">
                 <div class="footer__list footer__itiran">
                     <img class="footer__list-img" src="./image/itiran.png" alt="">
                     <p class="footer__list-name">一覧</p>
                 </div>
             </a>
-            <a href="./registrationpage.php">
+            <a class="mypage-link" href="./registrationpage.php">
                 <div class="footer__list footer__registration">
                     <img class="footer__list-img" src="./image/toruroku.png" alt="">
                     <p class="footer__list-name">登録</p>
                 </div>
             </a>
-            <a href="./mypage.html">
+            <a class="mypage-link" href="./mypage.html">
                 <div class="footer__list footer__mypage">
                     <img class="footer__list-img" src="./image/mypage.png" alt="">
                     <p class="footer__list-name">マイページ</p>
@@ -135,6 +138,7 @@ $row = $result->fetch_assoc();
             </a>
         </div>
     </footer>
+    <script src="./js/login_id.js"></script>
 </body>
 </html>
 

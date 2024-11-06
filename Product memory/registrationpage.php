@@ -47,19 +47,19 @@
     </main>
     <footer class="footer">
         <div class="footer__inner">
-            <a href="./main.html">
+            <a class="mypage-link" href="./main.html">
                 <div class="footer__list footer__itiran">
                     <img class="footer__list-img" src="./image/itiran.png" alt="">
                     <p class="footer__list-name">一覧</p>
                 </div>
             </a>
-            <a href="./registrationpage.php">
+            <a class="mypage-link" href="./registrationpage.php">
                 <div class="footer__list footer__registration">
                     <img class="footer__list-img" src="./image/toruroku.png" alt="">
                     <p class="footer__list-name">登録</p>
                 </div>
             </a>
-            <a href="./mypage.html">
+            <a class="mypage-link" href="./mypage.html">
                 <div class="footer__list footer__mypage">
                     <img class="footer__list-img" src="./image/mypage.png" alt="">
                     <p class="footer__list-name">マイページ</p>
@@ -67,6 +67,7 @@
             </a>
         </div>
     </footer>
+    <script src="./js/login_id.js"></script>
 </body>
 
 </html>
