@@ -16,26 +16,37 @@ if ($conn->connect_error) {
 // POSTデータからIDを取得
 $item_id = isset($_POST['id']) ? intval($_POST['id']) : 0;
 $login_id = isset($_GET['login_id']) ? $_GET['login_id'] : '';
-// その他の処理
 
-
-
+// 商品IDが有効かチェック
 if ($item_id > 0) {
-    // 商品を削除するSQL文
-    $sql = "DELETE FROM item WHERE id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $item_id);
+    // 商品に関連するbrand_idを取得するSQL
+    $sql_brand = "SELECT brand_id FROM item WHERE id = ?";
+    $stmt_brand = $conn->prepare($sql_brand);
+    $stmt_brand->bind_param("i", $item_id);
+    $stmt_brand->execute();
+    $stmt_brand->bind_result($brand_id);
+    $stmt_brand->fetch();
+    $stmt_brand->close();
 
-    if ($stmt->execute()) {
-        // 削除成功時、成功メッセージを表示し、登録ページにリダイレクト
-        echo "商品が削除されました。";
-        echo "<a href='./registration.php'>戻る</a>"; // 戻るリンク
+    if ($brand_id) {
+        // 商品を削除するSQL文
+        $sql = "DELETE FROM item WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $item_id);
+
+        if ($stmt->execute()) {
+            // 削除成功時、成功メッセージを表示し、登録ページにリダイレクト
+            echo "商品が削除されました。";
+            echo '<a href="registration.php?brand_id=' . urlencode($brand_id) . '&login_id=' . urlencode($login_id) . '">戻る</a>';
+        } else {
+            echo "削除に失敗しました。";
+        }
+
+        // ステートメントを閉じる
+        $stmt->close();
     } else {
-        echo "削除に失敗しました。";
+        echo "指定された商品が見つかりませんでした。";
     }
-
-    // ステートメントを閉じる
-    $stmt->close();
 } else {
     echo "無効な商品IDです。";
 }
