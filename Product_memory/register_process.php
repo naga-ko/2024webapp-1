@@ -1,9 +1,14 @@
 <?php
 // データベース接続情報
-$host = 'localhost';
-$dbname = 'user_db'; // データベース名
-$username = 'root'; // データベースのユーザー名
-$password = 'hfiuoajnjkl'; // データベースのパスワード（設定していない場合は空白）
+$host = 'localhost';  // または localhost
+$dbname = 'ProductMemory';
+$username = 'My_memory_userdb';
+$password = 'rftyjukijlkhgfgchgj';
+
+// $servername = "localhost";
+// $username = "root";
+// $password = "hfiuoajnjkl";
+// $dbname = "user_db";
 
 try {
     // データベース接続を確立

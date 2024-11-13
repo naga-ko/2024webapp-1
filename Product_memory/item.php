@@ -16,10 +16,16 @@ if ($login_id === null) {
 }
 
 // データベース接続
-$servername = "localhost";
-$username = "root";
-$password = "hfiuoajnjkl";
-$dbname = "user_db";
+// $servername = "localhost";
+// $username = "root";
+// $password = "hfiuoajnjkl";
+// $dbname = "user_db";
+
+$servername = 'localhost';  // または MySQL サーバーの IP アドレス（例：192.168.x.x）
+$dbname = 'ProductMemory';
+$username = 'My_memory_userdb';
+$password = 'rftyjukijlkhgfgchgj';
+
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {

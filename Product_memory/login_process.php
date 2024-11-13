@@ -6,7 +6,10 @@ $dbname = 'ProductMemory';
 $username = 'My_memory_userdb';
 $password = 'rftyjukijlkhgfgchgj';
 
-
+// $servername = "localhost";
+// $username = "root";
+// $password = "hfiuoajnjkl";
+// $dbname = "user_db";
 try {
     // データベース接続を確立
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);

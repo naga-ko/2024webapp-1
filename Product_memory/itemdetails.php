@@ -1,9 +1,14 @@
 <?php
 // データベース接続情報
-$servername = "localhost";
-$username = "root";
-$password = "hfiuoajnjkl";
-$dbname = "user_db";
+// $servername = "localhost";
+// $username = "root";
+// $password = "hfiuoajnjkl";
+// $dbname = "user_db";
+
+$servername = 'localhost';  // または MySQL サーバーの IP アドレス（例：192.168.x.x）
+$dbname = 'ProductMemory';
+$username = 'My_memory_userdb';
+$password = 'rftyjukijlkhgfgchgj';
 
 // データベースに接続
 $conn = new mysqli($servername, $username, $password, $dbname);

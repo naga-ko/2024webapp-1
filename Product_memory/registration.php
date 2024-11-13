@@ -16,13 +16,19 @@ $brand_id = isset($_GET['brand_id']) ? (int)$_GET['brand_id'] : 0;
 $_SESSION['brand_id'] = $brand_id;  // セッションに保存
 
 // データベース接続情報
-$host = '127.0.0.1';  // localhostの代わりに127.0.0.1を使用
+$host = 'localhost';  // または localhost
 $dbname = 'ProductMemory';
 $username = 'My_memory_userdb';
 $password = 'rftyjukijlkhgfgchgj';
 
+// $servername = "localhost";
+// $username = "root";
+// $password = "hfiuoajnjkl";
+// $dbname = "user_db";
+
 // MySQLへの接続
-$conn = new mysqli($host, $username, $password, $dbname);
+$conn = new mysqli($host, $username, $password, $dbname, null, $socket);
+// $conn = new mysqli($host, $username, $password, $dbname);
 
 // 接続エラーの確認
 if ($conn->connect_error) {
