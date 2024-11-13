@@ -15,11 +15,10 @@ if ($login_id === null) {
 $brand_id = isset($_GET['brand_id']) ? (int)$_GET['brand_id'] : 0;
 $_SESSION['brand_id'] = $brand_id;  // セッションに保存
 
-// データベース接続情報
-$host = '127.0.0.1';  // localhostの代わりに127.0.0.1を使用
-$dbname = 'ProductMemory';
-$username = 'My_memory_userdb';
-$password = 'rftyjukijlkhgfgchgj';
+$host = "localhost";
+$username = "root";
+$password = "hfiuoajnjkl";
+ $dbname = "user_db";
 
 // MySQLへの接続
 $conn = new mysqli($host, $username, $password, $dbname);
@@ -81,7 +80,7 @@ if ($login_id !== null) {
                 // login_id がセッションに存在する場合、URL に追加してリンクを生成
                 if ($login_id !== null) {
                     $url_with_login_id = "http://localhost:8888/registration.php?brand_id=" . urlencode($brand_id) . "&login_id=" . urlencode($login_id);
-                    echo '<a href="' . $url_with_login_id . '"><img class="main__registration-img" src="./image/purasu.png" alt=""></a>';
+                    echo '<a href="http://localhost:8888/item.html?brand_id='. urlencode($brand_id) .'&login_id=' . urlencode($login_id) . '"><img class="main__registration-img" src="./image/purasu.png" alt=""></a>';
                 } else {
                     echo '<p>ログインしてください。</p>';
                 }

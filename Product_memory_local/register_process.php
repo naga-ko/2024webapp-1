@@ -1,9 +1,9 @@
 <?php
-// データベース接続情報
-$host = '127.0.0.1';  // localhostの代わりに127.0.0.1を使用
-$dbname = 'ProductMemory';
-$username = 'My_memory_userdb';
-$password = 'rftyjukijlkhgfgchgj';
+
+$host = "localhost";
+$username = "root";
+$password = "hfiuoajnjkl";
+ $dbname = "user_db";
 
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
