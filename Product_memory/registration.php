@@ -16,14 +16,17 @@ $brand_id = isset($_GET['brand_id']) ? (int)$_GET['brand_id'] : 0;
 $_SESSION['brand_id'] = $brand_id;  // セッションに保存
 
 // データベース接続情報
-$servername = "localhost";
-$username = "root";
-$password = "hfiuoajnjkl";
-$dbname = "user_db";
-$conn = new mysqli($servername, $username, $password, $dbname);
+$host = '127.0.0.1';  // localhostの代わりに127.0.0.1を使用
+$dbname = 'ProductMemory';
+$username = 'My_memory_userdb';
+$password = 'rftyjukijlkhgfgchgj';
 
+// MySQLへの接続
+$conn = new mysqli($host, $username, $password, $dbname);
+
+// 接続エラーの確認
 if ($conn->connect_error) {
-    die("接続失敗: " . $conn->connect_error);
+    die("接続失敗: (" . $conn->connect_errno . ") " . $conn->connect_error);
 }
 
 // ブランド名の取得
@@ -36,7 +39,7 @@ if ($brand_result->num_rows > 0) {
     $brand_name = htmlspecialchars($brand_row['brand_name']);
 }
 
-// 商品を取得する処理はそのまま
+// 商品を取得する処理
 if ($login_id !== null) {
     $sql = "SELECT id, image, product_name, size, price, memo
             FROM item
@@ -50,7 +53,6 @@ if ($login_id !== null) {
     exit();
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="ja">

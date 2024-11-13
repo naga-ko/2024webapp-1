@@ -1,10 +1,11 @@
 <?php
 session_start();
 // データベース接続情報
-$host = 'localhost';
-$dbname = 'user_db';
-$username = 'root';
-$password = 'hfiuoajnjkl';
+$host = 'localhost';  // または MySQL サーバーの IP アドレス（例：192.168.x.x）
+$dbname = 'ProductMemory';
+$username = 'My_memory_userdb';
+$password = 'rftyjukijlkhgfgchgj';
+
 
 try {
     // データベース接続を確立
