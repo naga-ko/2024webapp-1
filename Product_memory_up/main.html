@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/modern-css-reset/dist/reset.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="header__back">
+            <h1 class="header__title">Cartlog</h1>
+        </div>
+    </header>
+    <main class="main">
+        <div class="main__inner">
+            <div class="main_btn">
+                <button class="main_btn-fashion">ファッション</button>
+                <button class="main_btn-magazine">雑貨</button>
+            </div>
+            <div class="main__fasshion">
+                <ul class="main__fasshion-unity">
+                    <li class="main__fasshion-individual"><a href="./registration.php?brand_id=1"
+                            class="brand-link">niko and...</a></li>
+                    <li class="main__fasshion-individual"><a href="./registration.php?brand_id=2"
+                            class="brand-link">GLOBAL WORK</a></li>
+                    <li class="main__fasshion-individual"><a href="./registration.php?brand_id=3"
+                            class="brand-link">LOWRYS FARM</a></li>
+                    <li class="main__fasshion-individual"><a href="./registration.php?brand_id=4"
+                            class="brand-link">LEPSIM</a></li>
+                    <li class="main__fasshion-individual"><a href="./registration.php?brand_id=5"
+                            class="brand-link">JEANASIS</a></li>
+                    <li class="main__fasshion-individual"><a href="./registration.php?brand_id=6"
+                            class="brand-link">BAYFLOW</a></li>
+                </ul>
+            </div>
+            <div class="main__magazine">
+                <ul class="main__magazine-unity">
+                    <li class="main__magazine-individual"><a href="./registration.php?brand_id=7"
+                            class="brand-link">BAYFLOW</a></li>
+                    <li class="main__magazine-individual"><a href="./registration.php?brand_id=8"
+                            class="brand-link">studio CLIP</a></li>
+                </ul>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="footer__inner">
+            <a class="mypage-link" href="./main.html">
+                <div class="footer__list footer__itiran">
+                    <img class="footer__list-img" src="./image/itiran.png" alt="">
+                    <p class="footer__list-name">一覧</p>
+                </div>
+            </a>
+            <a class="mypage-link" href="./registrationpage.php">
+                <div class="footer__list footer__registration">
+                    <img class="footer__list-img" src="./image/toruroku.png" alt="">
+                    <p class="footer__list-name">登録</p>
+                </div>
+            </a>
+            <a class="mypage-link" href="./mypage.html">
+                <div class="footer__list footer__mypage">
+                    <img class="footer__list-img" src="./image/mypage.png" alt="">
+                    <p class="footer__list-name">マイページ</p>
+                </div>
+            </a>
+        </div>
+    </footer>
+    <script src="./js/list.js"></script>
+    <script src="./js/login_id.js"></script>
+
+    <script>
+        // URLからlogin_idを取得する関数
+        function getLoginIdFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('login_id');
+        }
+
+        // すべてのブランドリンクにlogin_idを追加
+        window.addEventListener('DOMContentLoaded', (event) => {
+            const loginId = getLoginIdFromUrl();  // URLからlogin_idを取得
+            if (loginId) {
+                const brandLinks = document.querySelectorAll('.brand-link');
+                brandLinks.forEach(link => {
+                    // 現在のhrefにlogin_idを追加
+                    let currentHref = link.getAttribute('href');
+                    if (currentHref) {
+                        link.setAttribute('href', currentHref + '&login_id=' + loginId);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
